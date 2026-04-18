@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Jashpur Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: var(--text-dark);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .sidebar a {
+            color: #ccc;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            color: var(--primary-color);
+        }
+        .content {
+            flex: 1;
+            padding: 3rem;
+            background: var(--background-color);
+        }
+        .section-panel {
+            display: none;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        .section-panel.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .status-badge {
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .status-pending { background: #ffeaa7; color: #d63031; }
+        .status-shift { background: #74b9ff; color: #0984e3; }
+        .status-delivered { background: #55efc4; color: #00b894; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-layout" id="adminGuard" style="display:none;">
+        <div class="sidebar">
+            <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Admin Panel</h2>
+            <a class="active" onclick="showSection('addCategory')">➕ Add Category</a>
+            <a onclick="showSection('addProduct')">➕ Add Product</a>
+            <a onclick="showSection('manageOrders')">📦 Orders</a>
+            <div style="flex:1;"></div>
+            <a onclick="adminLogout()" style="color: #ff7675;">Logout</a>
+        </div>
+        
+        <div class="content">
+            <!-- Add Category -->
+            <div id="addCategory" class="section-panel active">
+                <h2>Add New Category</h2>
+                <form id="categoryForm" onsubmit="handleAddCategory(event)" style="margin-top: 2rem; max-width: 500px;">
+                    <div class="form-group">
+                        <label>Category Name</label>
+                        <input type="text" id="catName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="catDesc" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Category Image</label>
+                        <input type="file" id="catImage" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Add Category</button>
+                    <p id="catStatus"></p>
+                </form>
+            </div>
+
+            <!-- Add Product -->
+            <div id="addProduct" class="section-panel">
+                <h2>Add New Product</h2>
+                <form id="productForm" onsubmit="handleAddProduct(event)" style="margin-top: 2rem; max-width: 500px;">
+                    <div class="form-group">
+                        <label>Select Category</label>
+                        <select id="prodCategory" required>
+                            <!-- Dynamic Categories -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="prodName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (₹)</label>
+                        <input type="number" id="prodPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="prodDesc" rows="3" required></textarea>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label>Product Images (Multiple)</label>
+                        <input type="file" id="prodImages" accept="image/*" multiple required>
+                    </div> -->
+                    <button type="submit" class="btn-primary">Add Product</button>
+                    <p id="prodStatus"></p>
+                </form>
+            </div>
+
+            <!-- Manage Orders -->
+            <div id="manageOrders" class="section-panel">
+                <h2>Manage Orders</h2>
+                <table class="table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Address</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <!-- Dynamic Orders -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

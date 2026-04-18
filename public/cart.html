@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Jashpur Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        .cart-container {
+            display: flex;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .cart-items {
+            flex: 2;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        .cart-summary {
+            flex: 1;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .qty-btn {
+            background: #eee;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        .remove-btn {
+            color: #ff6b6b;
+            background: none;
+            font-size: 1.2rem;
+        }
+        
+        .checkout-form input, .checkout-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .cart-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Jashpur<span style="color: var(--text-dark);">Express</span></a>
+    </header>
+
+    <main style="margin-top: 100px; padding: 2rem 5%;">
+        <div class="cart-container">
+            <div class="cart-items">
+                <h2 style="margin-bottom: 1.5rem;">Shopping Cart</h2>
+                <div id="cartItemsList">
+                    <!-- Dynamic Items -->
+                </div>
+            </div>
+            
+            <div class="cart-summary">
+                <h2 style="margin-bottom: 1.5rem;">Order Summary</h2>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.2rem;">
+                    <span>Total Amount:</span>
+                    <span id="cartTotalValue" style="font-weight: 800;">₹0</span>
+                </div>
+                
+                <p id="minOrderWarning" style="color: red; font-size: 0.9rem; margin-bottom: 1rem; display: none;">
+                    * Minimum order amount is ₹500. Please add more items.
+                </p>
+
+                <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #eee;">
+
+                <h3 style="margin-bottom: 1rem;">Delivery Details</h3>
+                <form class="checkout-form" id="checkoutForm" onsubmit="placeOrder(event)">
+                    <input type="text" id="shipName" placeholder="Full Name" required>
+                    <input type="text" id="shipPhone" placeholder="Phone Number" required>
+                    <textarea id="shipAddress" placeholder="Complete Address (Jashpur only)" required rows="3"></textarea>
+                    
+                    <button type="submit" class="btn-primary checkout-btn" id="placeOrderBtn">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

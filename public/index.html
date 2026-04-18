@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jashpur Express | Local Delivery</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Location Gate Modal -->
+    <div id="locationGate" class="modal-overlay">
+      <div class="location-gate-modal">
+        <h2>📍 Verify Your Location</h2>
+        <p>We currently only serve Jashpur (Chhattisgarh).</p>
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Enter your City (e.g. Jashpur)"
+        />
+        <input
+          type="text"
+          id="pinInput"
+          placeholder="Enter Pincode (e.g. 496331)"
+        />
+        <button class="btn-primary" onclick="verifyLocation()">
+          Verify & Enter
+        </button>
+        <p
+          id="locationError"
+          style="color: red; margin-top: 10px; display: none"
+        >
+          Sorry, we don't deliver to this location yet.
+        </p>
+      </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header id="mainHeader" class="hidden">
+      <a href="index.html" class="logo"
+        >Jashpur<span style="color: var(--text-dark)">Express</span></a
+      >
+
+      <div class="location-picker">
+        <i
+          class="fas fa-map-marker-alt"
+          style="color: var(--primary-color)"
+        ></i>
+        <input type="text" value="Jashpur (496331)" readonly />
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search for groceries, pet food..." />
+      </div>
+
+      <div class="header-right">
+        <div id="authSection">
+          <button class="btn-primary" onclick="openLoginModal()">
+            <i class="fas fa-user"></i> <span>Login / Signup</span>
+          </button>
+        </div>
+
+        <div class="cart-icon" onclick="window.location.href='cart.html'">
+          <i class="fas fa-shopping-cart fa-lg"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="hidden">
+      <section class="categories-section">
+        <h2 class="section-header">Shop by Category</h2>
+        <div class="category-grid" id="categoryGrid">
+          <!-- Dynamic Content via JS -->
+        </div>
+      </section>
+
+      <section class="products-section">
+        <h2 class="section-header">Trending Products</h2>
+        <div class="product-grid" id="productGrid">
+          <!-- Dynamic Content via JS -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="mainFooter" class="hidden">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h2 class="logo" style="margin-bottom: 1rem">JashpurExpress</h2>
+          <p style="color: #aaa">
+            Your local daily needs,<br />delivered fast.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <a href="index.html">Home</a>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Contact</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h3>Categories</h3>
+          <a href="#">Grocery</a>
+          <a href="#">Pet Food</a>
+          <a href="#">Child Care</a>
+          <a href="#">Personal Care</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Jashpur Express. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Login/Signup Modal Placeholder -->
+    <div id="authModal" class="modal-overlay hidden">
+      <div class="location-gate-modal">
+        <h2 id="authTitle">Login</h2>
+        <form id="authForm" onsubmit="handleAuth(event)">
+          <input
+            type="text"
+            id="authName"
+            placeholder="Full Name (for Signup)"
+            class="hidden"
+          />=
+          <input
+            type="email"
+            id="authEmail"
+            placeholder="Email Address"
+            required
+          />
+          <input
+            type="password"
+            id="authPassword"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" class="btn-primary" id="authSubmitBtn">
+            Login
+          </button>
+          <p style="margin-top: 15px; font-size: 0.9rem">
+            <a
+              href="#"
+              onclick="toggleAuthMode()"
+              id="authToggleLink"
+              style="color: var(--primary-color)"
+              >Create an account</a
+            >
+          </p>
+          <p
+            style="margin-top: 5px; font-size: 0.9rem"
+            id="forgotPasswordLinkContainer"
+          >
+            <a
+              href="#"
+              onclick="showForgotPassword()"
+              style="color: var(--primary-color)"
+              >Forgot Password?</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>
