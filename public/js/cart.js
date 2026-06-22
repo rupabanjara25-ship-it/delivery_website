@@ -116,7 +116,7 @@ async function placeOrder(e) {
     };
 
     try {
-        const res = await fetch('/api/orders', {
+        const res = await fetch(`${APP_CONFIG.API_URL}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

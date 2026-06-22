@@ -37,7 +37,7 @@ function unlockWebsite() {
 }
 
 // 📦 API Fetching
-const API_URL = '/api';
+const API_URL = APP_CONFIG.API_URL;
 
 async function fetchCategories() {
     const grid = document.getElementById('categoryGrid');

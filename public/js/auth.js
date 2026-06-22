@@ -72,7 +72,7 @@ async function handleAuth(e) {
     const password = document.getElementById('authPassword').value;
     const name = document.getElementById('authName').value;
 
-    const endpoint = isLoginMode ? '/api/auth/login' : '/api/auth/register';
+    const endpoint = isLoginMode ? `${APP_CONFIG.API_URL}/auth/login` : `${APP_CONFIG.API_URL}/auth/register`;
     const payload = isLoginMode ? { email, password } : { name, email, password };
 
     try {
@@ -110,7 +110,7 @@ function logout() {
 function showForgotPassword() {
     const email = prompt("Enter your registered email address:");
     if (email) {
-        fetch('/api/auth/forgot-password', {
+        fetch(`${APP_CONFIG.API_URL}/auth/forgot-password`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -123,7 +123,7 @@ function showForgotPassword() {
                 if(otp) {
                     const newPassword = prompt("Enter your new password:");
                     if(newPassword) {
-                        fetch('/api/auth/reset-password', {
+                        fetch(`${APP_CONFIG.API_URL}/auth/reset-password`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ email, otp, newPassword })

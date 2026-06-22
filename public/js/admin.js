@@ -32,7 +32,7 @@ function showSection(sectionId) {
 
 async function loadCategoriesDropdown() {
     try {
-        const res = await fetch('/api/categories');
+        const res = await fetch(`${APP_CONFIG.API_URL}/categories`);
         const categories = await res.json();
         const select = document.getElementById('prodCategory');
         
@@ -56,7 +56,7 @@ async function handleAddCategory(e) {
     formData.append('categoryImage', document.getElementById('catImage').files[0]);
 
     try {
-        const res = await fetch('/api/categories', {
+        const res = await fetch(`${APP_CONFIG.API_URL}/categories`, {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${token}` },
             body: formData
@@ -91,7 +91,7 @@ async function handleAddProduct(e) {
     }
 
     try {
-        const res = await fetch('/api/products', {
+        const res = await fetch(`${APP_CONFIG.API_URL}/products`, {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${token}` },
             body: formData
@@ -114,7 +114,7 @@ async function loadOrders() {
     const token = JSON.parse(localStorage.getItem('userInfo')).token;
     
     try {
-        const res = await fetch('/api/orders', {
+        const res = await fetch(`${APP_CONFIG.API_URL}/orders`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const orders = await res.json();
@@ -156,7 +156,7 @@ async function updateOrderStatus(orderId, newStatus) {
     const token = JSON.parse(localStorage.getItem('userInfo')).token;
     
     try {
-        const res = await fetch(`/api/orders/${orderId}/status`, {
+        const res = await fetch(`${APP_CONFIG.API_URL}/orders/${orderId}/status`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
