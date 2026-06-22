@@ -76,7 +76,7 @@ async function handleAuth(e) {
     const payload = isLoginMode ? { email, password } : { name, email, password };
 
     try {
-        const res = await fetch(`http://localhost:5000${endpoint}`, {
+        const res = await fetch(`${endpoint}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -110,7 +110,7 @@ function logout() {
 function showForgotPassword() {
     const email = prompt("Enter your registered email address:");
     if (email) {
-        fetch('http://localhost:5000/api/auth/forgot-password', {
+        fetch('/api/auth/forgot-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -123,7 +123,7 @@ function showForgotPassword() {
                 if(otp) {
                     const newPassword = prompt("Enter your new password:");
                     if(newPassword) {
-                        fetch('http://localhost:5000/api/auth/reset-password', {
+                        fetch('/api/auth/reset-password', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ email, otp, newPassword })

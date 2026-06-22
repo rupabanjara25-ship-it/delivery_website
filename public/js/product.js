@@ -14,7 +14,7 @@ async function fetchProductDetails() {
     }
 
     try {
-        const res = await fetch(`http://localhost:5000/api/products/${productId}`);
+        const res = await fetch(`/api/products/${productId}`);
         const product = await res.json();
 
         if(!product || !product.name) {
